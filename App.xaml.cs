@@ -23,7 +23,7 @@ namespace SampleMvvmLight
     sealed partial class App : Application
     {
         /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
+        /// Initializes the singleton appli cation object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         public App()
@@ -55,6 +55,9 @@ namespace SampleMvvmLight
                 {
                     //TODO: Load state from previously suspended application
                 }
+
+                // Force the Culture language
+                System.Globalization.CultureInfo.CurrentCulture = new System.Globalization.CultureInfo("fr");
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;

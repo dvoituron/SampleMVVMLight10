@@ -9,7 +9,7 @@
 <#@ import namespace="Microsoft.CSharp" #>
 <#@ output extension=".cs" #>
 <#
-    var reswPath = @"Resources.resw";
+    var reswPath = @"en/Resources.resw";
 
     var provider = new CSharpCodeProvider();
     var className = provider.CreateEscapedIdentifier(
@@ -17,7 +17,7 @@
 
     Directory.SetCurrentDirectory(Host.ResolvePath(""));
     if (File.Exists(reswPath))
-    { 
+    {  
 #>
 using Windows.ApplicationModel.Resources; 
 
