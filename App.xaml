@@ -4,5 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SampleMvvmLight"
     xmlns:resources="using:SampleMvvmLight.Localization"
+    xmlns:locator="using:SampleMvvmLight.ViewModels"
     RequestedTheme="Light">
+    <Application.Resources>
+        <locator:ViewModelLocator x:Key="ViewModelLocator" />
+    </Application.Resources>
 </Application>

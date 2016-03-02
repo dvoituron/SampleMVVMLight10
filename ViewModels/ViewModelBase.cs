@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Views;
+using Microsoft.Practices.ServiceLocation;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,9 +9,60 @@ namespace SampleMvvmLight.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
-        #region Custom code
-
+        private int _loadingCounter = 0;
+        private List<CancellationTokenSource> _cancellationTokenSources;
         private Localization.Resources _resources = null;
+
+        #region CONSTRUCTORS
+
+        /// <summary>
+        /// Initializes a new instance of this ViewModel 
+        /// for the Design Mode and the Production Mode.
+        /// </summary>
+        public ViewModelBase()
+            : this(ServiceLocator.Current.GetInstance<Models.IDataService>(), 
+                   ServiceLocator.Current.GetInstance<IDialogService>(), 
+                   ServiceLocator.Current.GetInstance<INavigationService>())
+        {
+            if (this.IsInDesignMode)
+                this.InitializeDesignMode();
+            else
+                this.Initialize();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the ViewModelBase,
+        /// called by empty constructor (Design and Production),
+        /// and for Testing also.
+        /// </summary>
+        /// <param name="dataservice"></param>
+        /// <param name="dialogService"></param>
+        /// <param name="navigationService"></param>
+        protected ViewModelBase(Models.IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
+        {
+            this.DateService = dataservice;
+            this.DialogService = dialogService;
+            this.NavigationService = navigationService;
+        }
+
+        #endregion
+
+        #region SERVICES
+
+        /// <summary>
+        /// Gets a reference to <see cref="Model.IDataService" />
+        /// </summary>
+        protected Models.IDataService DateService { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to <see cref="Model.IDialogService" />
+        /// </summary>
+        protected IDialogService DialogService { get; private set; }
+
+        /// <summary>
+        /// Gets a reference to <see cref="Model.INavigationService" />
+        /// </summary>
+        protected INavigationService NavigationService { get; private set; }
 
         /// <summary>
         /// Gets a reference to the Resources string file 
@@ -24,10 +77,7 @@ namespace SampleMvvmLight.ViewModels
 
         #endregion
 
-        #region Default ViewModelBase
-
-        private int _loadingCounter = 0;
-        private List<CancellationTokenSource> _cancellationTokenSources;
+        #region LIFETIME and ACTIONS
 
         /// <summary>
         /// Gets or sets a value indicating whether the view model is currently loading. 
@@ -299,5 +349,6 @@ namespace SampleMvvmLight.ViewModels
         }
 
         #endregion
+
     }
 }

@@ -10,13 +10,13 @@ namespace SampleMvvmLight.Models
     {
         private const string UrlBase = "http://localhost:5099/friends.aspx";
 
-        public async Task<IEnumerable<Friend>> GetFriends()
+        public async Task<Friend[]> GetFriendsAsync()
         {
             var client = new HttpClient();
             string json = await client.GetStringAsync(new Uri(UrlBase));
 
             var result = JsonConvert.DeserializeObject<ListOfFriends>(json);
-            return result.Data;
+            return result.Data.ToArray();
         }
 
     }

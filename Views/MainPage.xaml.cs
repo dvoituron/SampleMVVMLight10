@@ -25,10 +25,6 @@ namespace SampleMvvmLight.Views
         public MainPage()
         {
             this.InitializeComponent();
-
-            Models.DataService ds = new Models.DataService();
-            ds.GetFriends();
-
         }
     }
 }

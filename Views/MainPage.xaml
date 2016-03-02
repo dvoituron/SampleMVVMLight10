@@ -13,7 +13,9 @@
         <vm:MainViewModel x:Key="ViewModel" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" DataContext="{StaticResource ViewModel}">
-        <TextBlock Text="{Binding Resources.Title}" />
+    <Grid DataContext="{StaticResource ViewModel}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock Text="{Binding Path=Resources.Title}" Height="28" VerticalAlignment="Top" />
+        <ListView Margin="10,86,10,10"/>
+        <TextBlock Margin="43,33,93,0" TextWrapping="Wrap" Text="{Binding TestMessage}" VerticalAlignment="Top"/>
     </Grid>
 </Page>

@@ -6,6 +6,6 @@ namespace SampleMvvmLight.Models
 {
     public interface IDataService
     {
-        Task<IEnumerable<Friend>> GetFriends();
+        Task<Friend[]> GetFriendsAsync();
     }
 }
