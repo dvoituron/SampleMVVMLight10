@@ -97,6 +97,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Helpers\DialogService.cs" />
     <Compile Include="Helpers\NavigationService.cs" />
     <Compile Include="Localization\Resources.cs">

@@ -15,7 +15,18 @@
 
     <Grid DataContext="{StaticResource ViewModel}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock Text="{Binding Path=Resources.Title}" Height="28" VerticalAlignment="Top" />
-        <ListView Margin="10,86,10,10"/>
-        <TextBlock Margin="43,33,93,0" TextWrapping="Wrap" Text="{Binding TestMessage}" VerticalAlignment="Top"/>
+        <ListView Margin="10,33,10,10" ItemsSource="{Binding Friends}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <Image Source="{Binding Picture}" Width="60" Height="60" />
+                        <StackPanel Margin="20, 10">
+                            <TextBlock Text="{Binding FirstName}" />
+                            <TextBlock Text="{Binding LastName}" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

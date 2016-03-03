@@ -24,10 +24,7 @@ namespace SampleMvvmLight.ViewModels
                    ServiceLocator.Current.GetInstance<IDialogService>(), 
                    ServiceLocator.Current.GetInstance<INavigationService>())
         {
-            if (this.IsInDesignMode)
-                this.InitializeDesignMode();
-            else
-                this.Initialize();
+            
         }
 
         /// <summary>
@@ -43,6 +40,7 @@ namespace SampleMvvmLight.ViewModels
             this.DateService = dataservice;
             this.DialogService = dialogService;
             this.NavigationService = navigationService;
+            this.Initialize();
         }
 
         #endregion
@@ -101,14 +99,6 @@ namespace SampleMvvmLight.ViewModels
         /// (after the InitializeComponent method of a UserControl). 
         /// </summary>
         public virtual void Initialize()
-        {
-            // Must be empty
-        }
-
-        /// <summary>
-        /// Initializes the view model in Design Mode.
-        /// </summary>
-        public virtual void InitializeDesignMode()
         {
             // Must be empty
         }

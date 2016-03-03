@@ -1,21 +1,28 @@
-﻿using System;
+﻿using SampleMvvmLight.Models;
+using System;
+using System.Collections.Generic;
 
 namespace SampleMvvmLight.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public override void Initialize()
+        public async override void Initialize()
         {
             base.Initialize();
-            this.TestMessage = "toto";
+            this.Friends = await this.DateService.GetFriendsAsync();
         }
 
-        public override void InitializeDesignMode()
+        private Friend[] _friends = null;
+        public Friend[] Friends
         {
-            base.InitializeDesignMode();
-            this.TestMessage = DateTime.Now.ToString();
+            get
+            {
+                return _friends;
+            }
+            set
+            {
+                Set(() => Friends, ref _friends, value);
+            }
         }
-
-        public string TestMessage { get; set; }
     }
 }

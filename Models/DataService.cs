@@ -8,7 +8,7 @@ namespace SampleMvvmLight.Models
 {
     public class DataService : IDataService
     {
-        private const string UrlBase = "http://localhost:5099/friends.aspx";
+        private const string UrlBase = "http://samplemvvmlight.azurewebsites.net/friends.aspx";
 
         public async Task<Friend[]> GetFriendsAsync()
         {

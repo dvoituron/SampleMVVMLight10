@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Ioc;
+﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using System;
@@ -13,7 +14,15 @@ namespace SampleMvvmLight.ViewModels
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             // Models
-            SimpleIoc.Default.Register<Models.IDataService, Models.DataService>();
+            if (ViewModelBase.IsInDesignModeStatic)
+            {
+                SimpleIoc.Default.Register<Models.IDataService, Design.DesignDataService>();
+            }
+            else
+            {
+                SimpleIoc.Default.Register<Models.IDataService, Models.DataService>();
+            }
+            
             SimpleIoc.Default.Register<INavigationService, Helpers.NavigationService>();
             SimpleIoc.Default.Register<IDialogService, Helpers.DialogService>();
 
