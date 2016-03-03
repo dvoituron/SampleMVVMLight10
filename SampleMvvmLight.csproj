@@ -98,8 +98,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
-    <Compile Include="Helpers\DialogService.cs" />
-    <Compile Include="Helpers\NavigationService.cs" />
+    <Compile Include="Design\DesignDialogService.cs" />
     <Compile Include="Localization\Resources.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -148,6 +147,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\DetailPage.xaml">

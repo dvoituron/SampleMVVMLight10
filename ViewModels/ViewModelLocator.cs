@@ -17,14 +17,16 @@ namespace SampleMvvmLight.ViewModels
             if (ViewModelBase.IsInDesignModeStatic)
             {
                 SimpleIoc.Default.Register<Models.IDataService, Design.DesignDataService>();
+                SimpleIoc.Default.Register<IDialogService, Design.DesignDialogService>();
             }
             else
             {
                 SimpleIoc.Default.Register<Models.IDataService, Models.DataService>();
+                SimpleIoc.Default.Register<IDialogService, DialogService>();
             }
             
-            SimpleIoc.Default.Register<INavigationService, Helpers.NavigationService>();
-            SimpleIoc.Default.Register<IDialogService, Helpers.DialogService>();
+            SimpleIoc.Default.Register<INavigationService, NavigationService>();
+            
 
             // ViewModels
             SimpleIoc.Default.Register<ViewModels.MainViewModel>();
