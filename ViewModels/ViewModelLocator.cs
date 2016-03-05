@@ -15,7 +15,7 @@ namespace SampleMvvmLight.ViewModels
         {
             // SimpleIoC
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
-
+            
             // Models
             if (ViewModelBase.IsInDesignModeStatic)
             {

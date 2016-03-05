@@ -13,9 +13,9 @@ namespace SampleMvvmLight.ViewModels
             this.DisplayDetailCommand = new RelayCommand<Friend>(DisplayDetailExecute, CanDisplayDetailExecute);
         }
 
-        public async override void Initialize()
+        public override void Initialize()
         {
-            this.Friends = await this.DateService.GetFriendsAsync();
+            this.Friends = this.DateService.GetFriendsAsync().Result;
         }
         
         private Friend[] _friends = null;

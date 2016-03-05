@@ -36,7 +36,7 @@ namespace SampleMvvmLight.ViewModels
         /// <param name="dataservice"></param>
         /// <param name="dialogService"></param>
         /// <param name="navigationService"></param>
-        protected ViewModelBase(IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
+        public ViewModelBase(IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
         {
             this.DateService = dataservice;
             this.DialogService = dialogService;

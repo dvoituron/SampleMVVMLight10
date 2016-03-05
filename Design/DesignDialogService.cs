@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SampleMvvmLight.Design
 {
-    public class DesignDialogService : IDialogService
+    public class DesignDialogService : Models.Interfaces.IDialogService
     {
         public Task ShowError(Exception error, string title, string buttonText, Action afterHideCallback)
         {
