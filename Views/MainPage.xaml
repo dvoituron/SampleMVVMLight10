@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:SampleMvvmLight.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:i="System.Windows"
     mc:Ignorable="d">
 
     <!-- Create a new instance of the associated ViewModel -->
@@ -28,6 +29,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Content="Display" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Command="{Binding DisplayDetailCommand}" CommandParameter="{Binding SelectedFriend, Mode=TwoWay}"  />
+        <Button Content="Display" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Command="{Binding DisplayDetailCommand}" CommandParameter="{Binding SelectedFriend}"  />
     </Grid>
 </Page>

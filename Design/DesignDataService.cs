@@ -1,10 +1,11 @@
 ﻿using SampleMvvmLight.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System;
 
 namespace SampleMvvmLight.Design
 {
-    public class DesignDataService : IDataService
+    public class DesignDataService : Models.Interfaces.IDataService
     {
         public async Task<Friend[]> GetFriendsAsync()
         {
@@ -37,6 +38,20 @@ namespace SampleMvvmLight.Design
                 });
 
                 return friends.ToArray();
+            });
+        }
+
+        public async Task<Friend> GetFriendAsync(int friendID)
+        {
+            return await Task.Run(() =>
+            {
+                return new Friend()
+                {
+                    ID = 1,
+                    FirstName = "Denis",
+                    LastName = "Voituron",
+                    Picture = "http://samplemvvmlight.azurewebsites.net:80/People/1.jpg"
+                };
             });
         }
     }

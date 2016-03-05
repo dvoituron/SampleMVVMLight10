@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
 using System;
 using System.Collections.Generic;
@@ -20,9 +21,9 @@ namespace SampleMvvmLight.ViewModels
         /// for the Design Mode and the Production Mode.
         /// </summary>
         public ViewModelBase()
-            : this(ServiceLocator.Current.GetInstance<Models.IDataService>(), 
+            : this(ServiceLocator.Current.GetInstance<Models.Interfaces.IDataService>(), 
                    ServiceLocator.Current.GetInstance<IDialogService>(), 
-                   ServiceLocator.Current.GetInstance<INavigationService>())
+                   ServiceLocator.Current.GetInstance<Models.Interfaces.INavigationService>())
         {
             
         }
@@ -35,7 +36,7 @@ namespace SampleMvvmLight.ViewModels
         /// <param name="dataservice"></param>
         /// <param name="dialogService"></param>
         /// <param name="navigationService"></param>
-        protected ViewModelBase(Models.IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
+        protected ViewModelBase(Models.Interfaces.IDataService dataservice, IDialogService dialogService, Models.Interfaces.INavigationService navigationService)
         {
             this.DateService = dataservice;
             this.DialogService = dialogService;
@@ -50,7 +51,7 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Gets a reference to <see cref="Model.IDataService" />
         /// </summary>
-        protected Models.IDataService DateService { get; private set; }
+        protected Models.Interfaces.IDataService DateService { get; private set; }
 
         /// <summary>
         /// Gets a reference to <see cref="Model.IDialogService" />
@@ -60,7 +61,7 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Gets a reference to <see cref="Model.INavigationService" />
         /// </summary>
-        protected INavigationService NavigationService { get; private set; }
+        protected Models.Interfaces.INavigationService NavigationService { get; private set; }
 
         /// <summary>
         /// Gets a reference to the Resources string file 
@@ -73,6 +74,28 @@ namespace SampleMvvmLight.ViewModels
             }
         }
 
+        /// <summary>
+        /// Registering a recipient for the forPageKey only,
+        /// and to execute the action specified
+        /// </summary>
+        /// <typeparam name="T">Type of action values</typeparam>
+        /// <param name="forPageKey">Identifier of the target page displayed.</param>
+        /// <param name="action">Action to execute</param>
+        public virtual void NavigationMessageReceived<T>(Action<T> action)
+        {
+            // Registering to the Messenger
+            Messenger.Default.Register<T>
+            (
+                 this,
+                 (message) =>
+                 {
+                     action.Invoke(message);
+                     { 
+                         Messenger.Default.Unregister<T>(this);
+                     }
+                 }
+            );
+        }
         #endregion
 
         #region LIFETIME and ACTIONS

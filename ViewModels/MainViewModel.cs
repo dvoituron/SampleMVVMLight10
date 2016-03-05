@@ -8,11 +8,13 @@ namespace SampleMvvmLight.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        public MainViewModel()
+        {
+            this.DisplayDetailCommand = new RelayCommand<Friend>(DisplayDetailExecute, CanDisplayDetailExecute);
+        }
+
         public async override void Initialize()
         {
-            // First, define the RelayCommands
-            this.DisplayDetailCommand = new RelayCommand<Friend>(DisplayDetailExecute, CanDisplayDetailExecute);
-
             this.Friends = await this.DateService.GetFriendsAsync();
         }
 
@@ -47,7 +49,7 @@ namespace SampleMvvmLight.ViewModels
 
         public void DisplayDetailExecute(Friend parameter)
         {
-            Debugger.Break();
+            this.NavigationService.NavigateTo<int>(ViewModelLocator.DETAIL_PAGE, this.SelectedFriend.ID);
         }
 
         public bool CanDisplayDetailExecute(Friend parameter)

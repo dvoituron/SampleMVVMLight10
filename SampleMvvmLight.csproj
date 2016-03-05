@@ -106,9 +106,11 @@
     </Compile>
     <Compile Include="Models\DataService.cs" />
     <Compile Include="Models\Friend.cs" />
-    <Compile Include="Models\IDataService.cs" />
+    <Compile Include="Models\Interfaces\IDataService.cs" />
+    <Compile Include="Models\Interfaces\INavigationService.cs" />
     <Compile Include="Models\ListOfFriends.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
@@ -118,6 +120,7 @@
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\NavigationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

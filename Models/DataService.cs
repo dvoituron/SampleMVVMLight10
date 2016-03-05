@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace SampleMvvmLight.Models
 {
-    public class DataService : IDataService
+    public class DataService : Models.Interfaces.IDataService
     {
         private const string UrlBase = "http://samplemvvmlight.azurewebsites.net/friends.aspx";
 
@@ -17,6 +17,12 @@ namespace SampleMvvmLight.Models
 
             var result = JsonConvert.DeserializeObject<ListOfFriends>(json);
             return result.Data.ToArray();
+        }
+
+        public async Task<Friend> GetFriendAsync(int friendID)
+        {
+            var friends = await this.GetFriendsAsync();
+            return friends.FirstOrDefault(i => i.ID == friendID);
         }
 
     }
