@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
-using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using SampleMvvmLight.Models.Interfaces;
 using System;
 
 namespace SampleMvvmLight.ViewModels
@@ -19,15 +19,15 @@ namespace SampleMvvmLight.ViewModels
             // Models
             if (ViewModelBase.IsInDesignModeStatic)
             {
-                SimpleIoc.Default.Register<Models.Interfaces.IDataService, Design.DesignDataService>();
+                SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
                 SimpleIoc.Default.Register<IDialogService, Design.DesignDialogService>();
-                SimpleIoc.Default.Register<Models.Interfaces.INavigationService, Views.NavigationService>();
+                SimpleIoc.Default.Register<INavigationService, Views.NavigationService>();
             }
             else
             {
-                SimpleIoc.Default.Register<Models.Interfaces.IDataService, Models.DataService>();
-                SimpleIoc.Default.Register<IDialogService, DialogService>();
-                SimpleIoc.Default.Register<Models.Interfaces.INavigationService>(() => CreateNavigationService());
+                SimpleIoc.Default.Register<IDataService, Models.DataService>();
+                SimpleIoc.Default.Register<IDialogService, Views.DialogService>();
+                SimpleIoc.Default.Register<INavigationService>(() => CreateNavigationService());
             }
 
             // ViewModels
@@ -35,7 +35,7 @@ namespace SampleMvvmLight.ViewModels
             SimpleIoc.Default.Register<ViewModels.DetailViewModel>();
         }
 
-        private Models.Interfaces.INavigationService CreateNavigationService()
+        private INavigationService CreateNavigationService()
         {
             var navigationService = new Views.NavigationService();
             navigationService.Configure(MAIN_PAGE, typeof(Views.MainPage));

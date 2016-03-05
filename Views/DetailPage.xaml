@@ -17,6 +17,8 @@
         <Button Content="Back" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Command="{Binding BackCommand}"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Details:" VerticalAlignment="Top" Style="{StaticResource TitleTextBlockStyle}"/>
         <Image HorizontalAlignment="Left" Height="200" Margin="10,47,0,0" VerticalAlignment="Top" Width="200" Source="{Binding Friend.Picture}"/>
+        <TextBlock Margin="10,252,10,0" TextWrapping="Wrap" Text="{Binding Friend.FirstName}" VerticalAlignment="Top" Style="{StaticResource HeaderTextBlockStyle}" FontWeight="Bold"/>
+        <TextBlock Margin="10,313,10,0" TextWrapping="Wrap" Text="{Binding Friend.LastName}" VerticalAlignment="Top" Style="{StaticResource SubheaderTextBlockStyle}"/>
 
     </Grid>
 </Page>

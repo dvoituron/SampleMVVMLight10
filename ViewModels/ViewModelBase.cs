@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using GalaSoft.MvvmLight.Views;
 using Microsoft.Practices.ServiceLocation;
+using SampleMvvmLight.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -21,9 +21,9 @@ namespace SampleMvvmLight.ViewModels
         /// for the Design Mode and the Production Mode.
         /// </summary>
         public ViewModelBase()
-            : this(ServiceLocator.Current.GetInstance<Models.Interfaces.IDataService>(), 
+            : this(ServiceLocator.Current.GetInstance<IDataService>(), 
                    ServiceLocator.Current.GetInstance<IDialogService>(), 
-                   ServiceLocator.Current.GetInstance<Models.Interfaces.INavigationService>())
+                   ServiceLocator.Current.GetInstance<INavigationService>())
         {
             
         }
@@ -36,7 +36,7 @@ namespace SampleMvvmLight.ViewModels
         /// <param name="dataservice"></param>
         /// <param name="dialogService"></param>
         /// <param name="navigationService"></param>
-        protected ViewModelBase(Models.Interfaces.IDataService dataservice, IDialogService dialogService, Models.Interfaces.INavigationService navigationService)
+        protected ViewModelBase(IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
         {
             this.DateService = dataservice;
             this.DialogService = dialogService;
@@ -51,7 +51,7 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Gets a reference to <see cref="Model.IDataService" />
         /// </summary>
-        protected Models.Interfaces.IDataService DateService { get; private set; }
+        protected IDataService DateService { get; private set; }
 
         /// <summary>
         /// Gets a reference to <see cref="Model.IDialogService" />
@@ -61,7 +61,7 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Gets a reference to <see cref="Model.INavigationService" />
         /// </summary>
-        protected Models.Interfaces.INavigationService NavigationService { get; private set; }
+        protected INavigationService NavigationService { get; private set; }
 
         /// <summary>
         /// Gets a reference to the Resources string file 

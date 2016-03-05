@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace SampleMvvmLight.Models
 {
-    public class DataService : Models.Interfaces.IDataService
+public class DataService : Models.Interfaces.IDataService
+{
+    private const string UrlBase = "http://samplemvvmlight.azurewebsites.net/friends.aspx";
+
+    public async Task<Friend[]> GetFriendsAsync()
     {
-        private const string UrlBase = "http://samplemvvmlight.azurewebsites.net/friends.aspx";
+        var client = new HttpClient();
+        string json = await client.GetStringAsync(new Uri(UrlBase));
 
-        public async Task<Friend[]> GetFriendsAsync()
-        {
-            var client = new HttpClient();
-            string json = await client.GetStringAsync(new Uri(UrlBase));
-
-            var result = JsonConvert.DeserializeObject<ListOfFriends>(json);
-            return result.Data.ToArray();
-        }
+        var result = JsonConvert.DeserializeObject<ListOfFriends>(json);
+        return result.Data.ToArray();
+    }
 
         public async Task<Friend> GetFriendAsync(int friendID)
         {

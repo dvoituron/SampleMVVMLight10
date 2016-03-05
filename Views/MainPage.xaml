@@ -30,5 +30,6 @@
             </ListView.ItemTemplate>
         </ListView>
         <Button Content="Display" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Command="{Binding DisplayDetailCommand}" CommandParameter="{Binding SelectedFriend}"  />
+        <Button Content="Help" HorizontalAlignment="Left" Margin="10,0,0,10" VerticalAlignment="Bottom" Command="{Binding DisplayHelpCommand}"/>
     </Grid>
 </Page>

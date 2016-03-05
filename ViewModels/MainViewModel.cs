@@ -17,7 +17,7 @@ namespace SampleMvvmLight.ViewModels
         {
             this.Friends = await this.DateService.GetFriendsAsync();
         }
-
+        
         private Friend[] _friends = null;
         public Friend[] Friends
         {
@@ -55,6 +55,31 @@ namespace SampleMvvmLight.ViewModels
         public bool CanDisplayDetailExecute(Friend parameter)
         {
             return this.SelectedFriend != null;
+        }
+
+        private RelayCommand _displayHelpCommand;
+
+        /// <summary>
+        /// Gets the DisplayHelpCommand.
+        /// </summary>
+        public RelayCommand DisplayHelpCommand
+        {
+            get
+            {
+                return _displayHelpCommand ?? (_displayHelpCommand = new RelayCommand(
+                    ExecuteDisplayHelpCommand,
+                    CanExecuteDisplayHelpCommand));
+            }
+        }
+
+        private void ExecuteDisplayHelpCommand()
+        {
+            this.DialogService.ShowMessage("Select a person and click on the Detail button.", "Information");
+        }
+
+        private bool CanExecuteDisplayHelpCommand()
+        {
+            return true;
         }
     }
 }
