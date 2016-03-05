@@ -1,6 +1,8 @@
-﻿using SampleMvvmLight.Models;
+﻿using GalaSoft.MvvmLight.Command;
+using SampleMvvmLight.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SampleMvvmLight.ViewModels
 {
@@ -8,7 +10,9 @@ namespace SampleMvvmLight.ViewModels
     {
         public async override void Initialize()
         {
-            base.Initialize();
+            // First, define the RelayCommands
+            this.DisplayDetailCommand = new RelayCommand<Friend>(DisplayDetailExecute, CanDisplayDetailExecute);
+
             this.Friends = await this.DateService.GetFriendsAsync();
         }
 
@@ -23,6 +27,32 @@ namespace SampleMvvmLight.ViewModels
             {
                 Set(() => Friends, ref _friends, value);
             }
+        }
+
+
+        private Friend _selectedFriend = null;
+        public Friend SelectedFriend
+        {
+            get
+            {
+                return _selectedFriend;
+            }
+            set
+            {
+                Set(() => SelectedFriend, ref _selectedFriend, value);
+            }
+        }
+
+        public RelayCommand<Friend> DisplayDetailCommand { get; private set; }
+
+        public void DisplayDetailExecute(Friend parameter)
+        {
+            Debugger.Break();
+        }
+
+        public bool CanDisplayDetailExecute(Friend parameter)
+        {
+            return this.SelectedFriend != null;
         }
     }
 }

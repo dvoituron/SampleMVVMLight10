@@ -15,7 +15,7 @@
 
     <Grid DataContext="{StaticResource ViewModel}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock Text="{Binding Path=Resources.Title}" Height="28" VerticalAlignment="Top" />
-        <ListView Margin="10,33,10,10" ItemsSource="{Binding Friends}">
+        <ListView x:Name="listView" Margin="10,33,10,47" ItemsSource="{Binding Friends}" SelectedItem="{Binding SelectedFriend, Mode=TwoWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal" Margin="10">
@@ -28,5 +28,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <Button Content="Display" HorizontalAlignment="Right" Margin="0,0,10,10" VerticalAlignment="Bottom" Command="{Binding DisplayDetailCommand}" CommandParameter="{Binding SelectedFriend, Mode=TwoWay}"  />
     </Grid>
 </Page>
