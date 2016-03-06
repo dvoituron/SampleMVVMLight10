@@ -10,5 +10,9 @@ namespace SampleMvvmLight.Models
         public string Picture { get; set; }
         public string Location { get; set; }
         public string Message { get; set; }
+        public override string ToString()
+        {
+            return $"{FirstName} {LastName}";
+        }
     }
 }
