@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="Design\DesignDataService.cs" />
     <Compile Include="Design\DesignDialogService.cs" />
+    <Compile Include="Design\DesignNavigationService.cs" />
     <Compile Include="Localization\Resources.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

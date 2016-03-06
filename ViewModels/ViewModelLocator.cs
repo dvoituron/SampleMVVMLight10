@@ -21,7 +21,7 @@ namespace SampleMvvmLight.ViewModels
             {
                 SimpleIoc.Default.Register<IDataService, Design.DesignDataService>();
                 SimpleIoc.Default.Register<IDialogService, Design.DesignDialogService>();
-                SimpleIoc.Default.Register<INavigationService, Views.NavigationService>();
+                SimpleIoc.Default.Register<INavigationService, Design.DesignNavigationService>();
             }
             else
             {
