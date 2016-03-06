@@ -16,7 +16,7 @@ namespace SampleMvvmLight.ViewModels
 
         protected async override Task OnLoadedAsync()
         {
-            this.Friends = await this.DateService.GetFriendsAsync();
+            this.Friends = await this.DataService.GetFriendsAsync();
         }
 
         private Friend[] _friends = null;

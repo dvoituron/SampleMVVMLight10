@@ -40,7 +40,7 @@ namespace SampleMvvmLight.ViewModels
         /// <param name="navigationService"></param>
         public ViewModelBase(IDataService dataservice, IDialogService dialogService, INavigationService navigationService)
         {
-            this.DateService = dataservice;
+            this.DataService = dataservice;
             this.DialogService = dialogService;
             this.NavigationService = navigationService;
         }
@@ -52,7 +52,7 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Gets a reference to <see cref="Model.IDataService" />
         /// </summary>
-        protected IDataService DateService { get; private set; }
+        protected IDataService DataService { get; private set; }
 
         /// <summary>
         /// Gets a reference to <see cref="Model.IDialogService" />

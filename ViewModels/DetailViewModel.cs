@@ -15,14 +15,14 @@ namespace SampleMvvmLight.ViewModels
 
         protected async override Task OnNavigationFrom(object parameter)
         {
-            this.Friend = await this.DateService.GetFriendAsync((int)parameter);
+            this.Friend = await this.DataService.GetFriendAsync((int)parameter);
         }
 
         protected async override Task OnLoadedAsync()
         {
             if (this.IsInDesignMode)
             {
-                this.Friend = await this.DateService.GetFriendAsync(1);
+                this.Friend = await this.DataService.GetFriendAsync(1);
             }
 
         }
