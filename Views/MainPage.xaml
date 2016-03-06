@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:i="System.Windows"
     mc:Ignorable="d">
-
+    
     <!-- Create a new instance of the associated ViewModel -->
     <Page.Resources>
         <vm:MainViewModel x:Key="ViewModel" />

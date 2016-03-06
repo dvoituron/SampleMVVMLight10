@@ -29,7 +29,7 @@ namespace SampleMvvmLight.Views
             Unloaded += async delegate { await ViewModel.CallOnUnloaded(); };
         }
 
-        public ViewModels.MainViewModel ViewModel
+        private ViewModels.MainViewModel ViewModel
         {
             get { return ((ViewModels.MainViewModel)Resources["ViewModel"]); }
         }

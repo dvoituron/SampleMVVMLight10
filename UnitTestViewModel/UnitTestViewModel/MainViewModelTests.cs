@@ -29,9 +29,10 @@ namespace UnitTestViewModel
         }
 
         [TestMethod]
-        public void CheckDisplayDetailCommand_WithoutSelectedFriend()
+        public async Task CheckDisplayDetailCommand_WithoutSelectedFriend()
         {
             MainViewModel main = new MainViewModel();
+            await main.CallOnLoaded();
 
             bool ok = main.DisplayDetailCommand.CanExecute(null);
 
@@ -39,9 +40,10 @@ namespace UnitTestViewModel
         }
 
         [TestMethod]
-        public void CheckDisplayDetailCommand_WithSelectedFriend()
+        public async Task CheckDisplayDetailCommand_WithSelectedFriend()
         {
             MainViewModel main = new MainViewModel();
+            await main.CallOnLoaded();
 
             main.SelectedFriend = main.Friends[0];
             bool ok = main.DisplayDetailCommand.CanExecute(null);
@@ -50,9 +52,10 @@ namespace UnitTestViewModel
         }
 
         [TestMethod]
-        public void ExecuteDisplayDetailCommand()
+        public async Task ExecuteDisplayDetailCommand()
         {
             MainViewModel main = new MainViewModel();
+            await main.CallOnLoaded();
 
             main.SelectedFriend = main.Friends[0];
             main.DisplayDetailCommand.Execute(main.SelectedFriend);
