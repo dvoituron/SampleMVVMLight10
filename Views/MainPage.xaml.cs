@@ -25,6 +25,13 @@ namespace SampleMvvmLight.Views
         public MainPage()
         {
             this.InitializeComponent();
+            Loaded += async delegate { await ViewModel.CallOnLoaded(); };
+            Unloaded += async delegate { await ViewModel.CallOnUnloaded(); };
+        }
+
+        public ViewModels.MainViewModel ViewModel
+        {
+            get { return ((ViewModels.MainViewModel)Resources["ViewModel"]); }
         }
     }
 }

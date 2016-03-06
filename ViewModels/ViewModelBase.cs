@@ -10,6 +10,7 @@ namespace SampleMvvmLight.ViewModels
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {
+        private readonly Task _emptyTask = new Task(() => { });
         private int _loadingCounter = 0;
         private List<CancellationTokenSource> _cancellationTokenSources;
         private Localization.Resources _resources = null;
@@ -25,7 +26,8 @@ namespace SampleMvvmLight.ViewModels
                    ServiceLocator.Current.GetInstance<IDialogService>(), 
                    ServiceLocator.Current.GetInstance<INavigationService>())
         {
-            
+            if (ViewModelBase.IsInDesignModeStatic)
+                this.OnLoadedAsync();
         }
 
         /// <summary>
@@ -41,7 +43,6 @@ namespace SampleMvvmLight.ViewModels
             this.DateService = dataservice;
             this.DialogService = dialogService;
             this.NavigationService = navigationService;
-            this.Initialize();
         }
 
         #endregion
@@ -79,23 +80,31 @@ namespace SampleMvvmLight.ViewModels
         /// and to execute the action specified
         /// </summary>
         /// <typeparam name="T">Type of action values</typeparam>
-        /// <param name="forPageKey">Identifier of the target page displayed.</param>
-        /// <param name="action">Action to execute</param>
-        public virtual void NavigationMessageReceived<T>(Action<T> action)
+        public void NavigationRegistering<T>()
         {
             // Registering to the Messenger
             Messenger.Default.Register<T>
             (
                  this,
-                 (message) =>
+                 async (message) =>
                  {
-                     action.Invoke(message);
-                     { 
-                         Messenger.Default.Unregister<T>(this);
-                     }
+                     await OnNavigationFrom(message);
+                     Messenger.Default.Unregister<T>(this);
                  }
             );
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="parameter"></param>
+        protected virtual Task OnNavigationFrom(object parameter)
+        {
+            // Empty
+            return _emptyTask;
+        }
+
         #endregion
 
         #region LIFETIME and ACTIONS
@@ -115,15 +124,6 @@ namespace SampleMvvmLight.ViewModels
 
                 RaisePropertyChanged();
             }
-        }
-
-        /// <summary>
-        /// Initializes the view model. Must only be called once per view model instance 
-        /// (after the InitializeComponent method of a UserControl). 
-        /// </summary>
-        public virtual void Initialize()
-        {
-            // Must be empty
         }
 
         /// <summary>
@@ -317,21 +317,21 @@ namespace SampleMvvmLight.ViewModels
         /// <summary>
         /// Initializes the view model (should be called in the view's Loaded event). 
         /// </summary>
-        public void CallOnLoaded()
+        public async Task CallOnLoaded()
         {
             if (!IsViewLoaded)
             {
-                OnLoaded();
+                await OnLoadedAsync();
                 IsViewLoaded = true;
             }
         }
 
         /// <summary>Cleans up the view model (should be called in the view's Unloaded event). </summary>
-        public void CallOnUnloaded()
+        public async Task CallOnUnloaded()
         {
             if (IsViewLoaded)
             {
-                OnUnloaded();
+                await OnUnloadedAsync();
                 IsViewLoaded = false;
             }
 
@@ -349,16 +349,18 @@ namespace SampleMvvmLight.ViewModels
 
         /// <summary>Implementation of the initialization method. 
         /// If the view model is already initialized the method is not called again by the Initialize method. </summary>
-        protected virtual void OnLoaded()
+        protected virtual Task OnLoadedAsync()
         {
             // Must be empty
+            return _emptyTask;
         }
 
         /// <summary>Implementation of the clean up method. 
         /// If the view model is already cleaned up the method is not called again by the Cleanup method. </summary>
-        protected virtual void OnUnloaded()
+        protected virtual Task OnUnloadedAsync()
         {
             // Must be empty
+            return _emptyTask;
         }
 
         #endregion

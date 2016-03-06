@@ -3,6 +3,7 @@ using SampleMvvmLight.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace SampleMvvmLight.ViewModels
 {
@@ -13,11 +14,11 @@ namespace SampleMvvmLight.ViewModels
             this.DisplayDetailCommand = new RelayCommand<Friend>(DisplayDetailExecute, CanDisplayDetailExecute);
         }
 
-        public override void Initialize()
+        protected async override Task OnLoadedAsync()
         {
-            this.Friends = this.DateService.GetFriendsAsync().Result;
+            this.Friends = await this.DateService.GetFriendsAsync();
         }
-        
+
         private Friend[] _friends = null;
         public Friend[] Friends
         {

@@ -20,9 +20,10 @@ namespace UnitTestViewModel
         }
 
         [TestMethod]
-        public void ComputeNumberOfFriends()
+        public async Task ComputeNumberOfFriends()
         {
             MainViewModel main = new MainViewModel();
+            await main.CallOnLoaded();
 
             Assert.AreEqual(3, main.Friends.Length);
         }
